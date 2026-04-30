@@ -7,6 +7,12 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+    
+    # Add PostgreSQL bin directory to PATH for psycopg to find libpq.dll
+    pg_bin_path = r"C:\Program Files\PostgreSQL\18\bin"
+    if os.path.exists(pg_bin_path) and pg_bin_path not in os.environ['PATH']:
+        os.environ['PATH'] += os.pathsep + pg_bin_path
+        
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
