@@ -2,110 +2,116 @@ from django.db import models
 
 
 class Slider(models.Model):
-    image_src = models.CharField(max_length=200, default="")
-    image_width = models.IntegerField(default=0)
-    image_height = models.IntegerField(default=0)
-    anchor_url = models.CharField(max_length=200, default="")
-    movie_genre = models.CharField(max_length=20, default="")
-    movie_title = models.CharField(max_length=100, default="")
-    lower_rating = models.CharField(max_length=5, default="")
-    upper_rating = models.CharField(max_length=5, default="")
+    image_src = models.CharField(max_length=200, null=True, blank=True, default="")
+    image_width = models.IntegerField(null=True, blank=True, default=0)
+    image_height = models.IntegerField(null=True, blank=True, default=0)
+    anchor_url = models.CharField(max_length=200, null=True, blank=True, default="")
+    movie_genre = models.CharField(max_length=50, null=True, blank=True, default="")
+    movie_title = models.CharField(max_length=100, null=True, blank=True, default="")
+    lower_rating = models.CharField(max_length=5, null=True, blank=True, default="")
+    upper_rating = models.CharField(max_length=5, null=True, blank=True, default="")
 
     def __str__(self):
-        return self.movie_title
+        return str(self.movie_title)
 
 
 class MovieTheater(models.Model):
-    type = models.CharField(max_length=20)
-    img_src = models.CharField(max_length=200)
-    img_width = models.IntegerField()
-    img_height = models.IntegerField()
-    anchor_url = models.CharField(max_length=200)
-    movie_genre = models.CharField(max_length=20)
-    movie_title = models.CharField(max_length=100)
-    lower_rating = models.CharField(max_length=5)
-    upper_rating = models.CharField(max_length=5)
+    type = models.CharField(max_length=20, null=True, blank=True)
+    img_src = models.CharField(max_length=200, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
+    anchor_url = models.CharField(max_length=200, null=True, blank=True)
+    movie_genre = models.CharField(max_length=50, null=True, blank=True)
+    movie_title = models.CharField(max_length=100, null=True, blank=True)
+    lower_rating = models.CharField(max_length=5, null=True, blank=True)
+    upper_rating = models.CharField(max_length=5, null=True, blank=True)
 
     def __str__(self):
-        return self.movie_title
+        return str(self.movie_title)
 
 
 class MovieTV(models.Model):
-    type = models.CharField(max_length=20)
-    img_src = models.CharField(max_length=200)
-    img_width = models.IntegerField()
-    img_height = models.IntegerField()
-    anchor_url = models.CharField(max_length=200)
-    movie_genre = models.CharField(max_length=20)
-    movie_title = models.CharField(max_length=100)
-    lower_rating = models.CharField(max_length=5)
-    upper_rating = models.CharField(max_length=5)
+    type = models.CharField(max_length=20, null=True, blank=True)
+    img_src = models.CharField(max_length=200, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
+    anchor_url = models.CharField(max_length=200, null=True, blank=True)
+    movie_genre = models.CharField(max_length=50, null=True, blank=True)
+    movie_title = models.CharField(max_length=100, null=True, blank=True)
+    lower_rating = models.CharField(max_length=5, null=True, blank=True)
+    upper_rating = models.CharField(max_length=5, null=True, blank=True)
 
     def __str__(self):
-        return self.movie_title
+        return str(self.movie_title)
 
 
 class Trailer(models.Model):
-    title = models.CharField(max_length=100)
+    trailer_url = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return str(self.trailer_url)
 
 
 class TrailerItem(models.Model):
-    trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE, related_name="items")
-    img_src = models.CharField(max_length=200)
-    video_url = models.CharField(max_length=200)
-    title = models.CharField(max_length=100)
-
+    img_src = models.CharField(max_length=200, null=True, blank=True)
+    img_alt = models.CharField(max_length=100, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
+    description = models.CharField(max_length=100, null=True, blank=True)
+    duration = models.CharField(max_length=20, null=True, blank=True)
+    
     def __str__(self):
-        return self.title
+        return str(self.description)
 
 
 class News(models.Model):
-    section = models.CharField(max_length=50)
-    img_src = models.CharField(max_length=200)
-    img_alt = models.CharField(max_length=100)
-    img_width = models.IntegerField()
-    img_height = models.IntegerField()
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    time = models.CharField(max_length=50)
+    section = models.CharField(max_length=50, null=True, blank=True)
+    img_src = models.CharField(max_length=200, null=True, blank=True)
+    img_alt = models.CharField(max_length=100, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
+    time = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class Tweet(models.Model):
-    username = models.CharField(max_length=100)
-    content = models.TextField()
-    time = models.CharField(max_length=50)
+    content = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return str(self.content)
 
 
 class Celebrity(models.Model):
-    name = models.CharField(max_length=100)
-    img_src = models.CharField(max_length=200)
-    role = models.CharField(max_length=100)
+    anchor_url = models.CharField(max_length=200, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
+    celebrity_url = models.CharField(max_length=200, null=True, blank=True)
+    celebrity_name = models.CharField(max_length=100, null=True, blank=True)
+    celebrity_type = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.celebrity_name)
 
 
 class Advertisement(models.Model):
-    img_src = models.CharField(max_length=200)
-    link = models.CharField(max_length=200)
+    section = models.CharField(max_length=20, null=True, blank=True)
+    img_src = models.CharField(max_length=200, null=True, blank=True)
+    img_width = models.IntegerField(null=True, blank=True)
+    img_height = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.link
+        return str(self.section)
 
 
 class SocialLink(models.Model):
-    name = models.CharField(max_length=50)
-    url = models.CharField(max_length=200)
-    icon = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    anchor_class = models.CharField(max_length=2, null=True, blank=True)
+    url = models.CharField(max_length=200, null=True, blank=True)
+    icon_class = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
