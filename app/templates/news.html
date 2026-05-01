@@ -27,7 +27,7 @@
 										<!-- DB -->
 				            			<h3><a href="#">{{ latest_news.title }}</a></h3>
 				            			<span class="time">{{ latest_news.time }}</span>
-				            			<p>{{ latest_news.content }}</p>
+				            			<p>{{ latest_news.content|safe }}</p>
 				            		</div>
 									{% endif %}
 				            	</div>
